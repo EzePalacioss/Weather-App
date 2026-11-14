@@ -1,10 +1,11 @@
 export async function obtenerClima(req,res){
-    const tieneLetras = /[a-zA-ZáéíóúÁÉÍÓÚñÑ]/.test(ciudad);
-    let ciudad = req.query.ciudad;
+    const {ciudad} = req.query;
     if(!ciudad) return res.status(400).json({err: 'No se colocó ninguna ciudad'})
+        
+        const tieneLetras = /[a-zA-ZáéíóúÁÉÍÓÚñÑ]/.test(ciudad);
     if (!tieneLetras) {
-    return res.status(400).json({ err: 'Ingresá un nombre de ciudad válido' });
-}
+        return res.status(400).json({ err: 'Ingresá un nombre de ciudad válido' });
+    }
     try {
         // guardamos la apikey en esta variable
           const apiKey = process.env.OPENWEATHER_API_KEY;
